@@ -4,7 +4,10 @@
 
 <header>
   <div class="header">
-    <a href="#" class="logo"><img src="https://geekyhumans.com/wp-content/uploads/2022/09/owl.png?ezimgfmt=ng%3Awebp%2Fngcb5%2Frs%3Adevice%2Frscb5-1" alt="CSS Header"></a>
+    <div class="header-left">
+      <a href="#" class="logo"><img src="https://geekyhumans.com/wp-content/uploads/2022/09/owl.png?ezimgfmt=ng%3Awebp%2Fngcb5%2Frs%3Adevice%2Frscb5-1" alt="CSS Header"></a>
+      <h2>{config.title}</h2>
+    </div>
     <div class="header-right">
       <div class="search-container">
         <form action="/action_page.php">
@@ -30,46 +33,60 @@
   .header {
     overflow: hidden;
     background-color: #0b1622;
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
   }
 
   .header img {
-    width: 50px;
+    width: 3.125rem;
   }
 
   .header a {
     float: left;
     color: rgb(255, 255, 255);
     text-align: center;
-    padding: 12px;
+    padding: 0.75rem;
     text-decoration: none;
-    font-size: 18px;
-    line-height: 25px;
-    border-radius: 4px;
+    font-size: 1.125rem;
+    line-height: 1.5625rem;
+    border-radius: 0.25rem;
+  }
+
+  .header-left h2 {
+    font-size: 1.5625rem;
+    font-weight: bold;
+    padding: 0 !important;
+    margin: 0;
+    margin-left: 0.625rem;
   }
 
   input[type="text"]{
-    padding: 8px 20px;
-    border-radius: 50px;
+    padding: 0.5em 1.25em;
+    border-radius: 3.125em;
     background-color: #123;
     border-color: white;
-    margin-right: 30px;
+    margin-right: 1.875rem;
     border: 0;
   }
 
   .book-button{
-    padding: 10px 30px;
-    border-radius: 50px;
+    padding: 0.625em 1.875em;
+    border-radius: 3.125em;
   }
 
   .header a.logo {
-    font-size: 25px;
+    font-size: 1.5625rem;
     font-weight: bold;
     padding: 0 !important;
   }
 
   .header-right {
     float: right;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-left {
+    float: left;
     display: flex;
     align-items: center;
   }
