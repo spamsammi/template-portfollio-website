@@ -1,6 +1,7 @@
 <script lang="ts">
   import config from '$lib/config.json';
   import { getImageByNameOrFirst } from '$lib/getImages';
+  import { page } from '$app/stores';
 
   const images = import.meta.glob('../images/logo/*.{jpg,png,svg}', { eager: true }) as Record<string, { default: string }>;
   const logo = getImageByNameOrFirst(images, 'logo');
@@ -9,14 +10,18 @@
 <header>
   <div class="header">
     <div class="header-left">
-      <a href="/" class="logo"><img src={logo} alt="Logo"></a>
-      <h1>{config.title.text}</h1>
+      <a href="/"><img src={logo} alt="Logo"></a>
+      <a href="/"><h1>{config.title.text}</h1></a>
     </div>
-    <div class="header-right">
-      {#each config.header.links as link}
-        <a href={link.href}>{link.text}</a>
-      {/each}
-    </div>
+    <nav>
+      <ul class="header-right">
+        {#each config.header.links as link}
+          <li class:active={$page.url.pathname === link.href}>
+            <a href={link.href}>{link.text}</a>
+          </li>
+        {/each}
+      </ul>
+    </nav>
   </div>
 </header>
 
@@ -29,16 +34,19 @@
     padding: 1rem 2rem;
   }
   .header-left {
-    color: var(--color-pallete-7);
     display: flex;
     align-items: center;
     gap: 1rem;
+  }
+  .header-left a {
+    text-decoration: none;
   }
   .header-left img {
     width: 3rem;
     height: auto;
   }
   .header-left h1 {
+    color: var(--color-pallete-7);
     font-family: var(--font-title);
     margin: 0;
   }
@@ -47,16 +55,26 @@
     align-items: center;
     gap: 1.5rem;
   }
-  .header-right a {
-    color: var(--color-pallete-7);
+  .header-right li {
     font-family: var(--font-header);
     font-size: 1.2rem;
-    text-decoration: none;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth, gradual */
+    list-style: none;
   }
-  .header-right a:hover {
+  .header-right li a {
+    color: var(--color-pallete-7);
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+    display: inline-block;
+  }
+  .header-right li.active a {
+     color: var(--color-pallete-5);
+     font-weight: bold;
+   }
+  .header-right li:hover a {
     color: var(--color-pallete-5);
     transform: scale(1.15);
   }
+
 </style>
   
