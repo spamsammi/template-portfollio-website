@@ -1,3 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Quicksand:wght@700&family=Merriweather:wght@400&display=swap');
+/*
+* Global Color Palette 
+* Used so that if updating the whole site, you can just change the colors here and it will update everywhere 
+*/
+:root {
+    --color-pallete-1: #FFDAB9;
+    --color-pallete-2: #FFB3AB;
+    --color-pallete-3: #FF8C82;
+    --color-pallete-4: #FF5C5C;
+    --color-pallete-5: #FF3B3F;
+    --color-pallete-6: #D7263D;
+    --color-pallete-7: #A1122B;
+}
+/*
+* Global Font Styles
+* Used so that if updating the whole site, you can just change the fonts here and it will update everywhere
+*/
+:root {
+    --font-title: 'Abril Fatface', serif;
+    --font-header: 'Quicksand', sans-serif;
+    --font-body: 'Merriweather', serif;
+}
 html, body {
     margin: 0;
     padding: 0;

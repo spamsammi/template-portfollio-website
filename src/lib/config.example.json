@@ -9,12 +9,30 @@
                 "href": "/"
             },
             {
-                "text": "Contact",
-                "href": "/contact"
+                "text": "Media",
+                "href": "/media",
+                "sublinks": [
+                    {
+                        "text": "Traditional Art",
+                        "href": "/traditional-art"
+                    },
+                    {
+                        "text": "Digital Art",
+                        "href": "/digital-art"
+                    },
+                    {
+                        "text": "Sewing",
+                        "href": "/sewing"
+                    }
+                ]
             },
             {
                 "text": "About",
                 "href": "/about"
+            },
+            {
+                "text": "Contact",
+                "href": "/contact"
             }
         ]
     }
