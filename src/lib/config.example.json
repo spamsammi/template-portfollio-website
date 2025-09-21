@@ -1,3 +1,21 @@
 {
-    "title": "My Portfolio Website"
+    "title": {
+        "text": "My Portfolio Website"
+    },
+    "header": {
+        "links": [
+            {
+                "text": "Home",
+                "href": "/"
+            },
+            {
+                "text": "Contact",
+                "href": "/contact"
+            },
+            {
+                "text": "About",
+                "href": "/about"
+            }
+        ]
+    }
 }

@@ -24,3 +24,15 @@ vite.config.ts.timestamp-*
 
 # Config
 src/lib/config.json
+
+# All image types (since this is a template repository, the actual forks or CD repository should keep all their images in the repository)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+*.webp
+*.avif
+*.heic
+*.heif
