@@ -1,28 +1,26 @@
 <script lang="ts">
   import config from '$lib/config.json';
   import { getImageByNameOrFirst } from '$lib/getImages';
-  import { page } from '$app/stores';
+  import { page } from '$app/state';
 
   const images = import.meta.glob('../images/logo/*.{jpg,png,svg}', { eager: true }) as Record<string, { default: string }>;
   const logo = getImageByNameOrFirst(images, 'logo');
 </script>
 
-<header>
-  <div class="header">
-    <div class="header-left">
-      <a href="/"><img src={logo} alt="Logo"></a>
-      <a href="/"><h1>{config.title.text}</h1></a>
-    </div>
-    <nav>
-      <ul class="header-right">
-        {#each config.header.links as link}
-          <li class:active={$page.url.pathname === link.href}>
-            <a href={link.href}>{link.text}</a>
-          </li>
-        {/each}
-      </ul>
-    </nav>
+<header class="header">
+  <div class="header-left">
+    <a href="/"><img src={logo} alt="Logo"></a>
+    <a href="/"><h1>{config.title.text}</h1></a>
   </div>
+  <nav>
+    <ul class="header-right">
+      {#each config.header.links as link}
+        <li class:active={page.url.pathname === link.href}>
+          <a href={link.href}>{link.text}</a>
+        </li>
+      {/each}
+    </ul>
+  </nav>
 </header>
 
 <style>
