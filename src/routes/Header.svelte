@@ -1,10 +1,12 @@
 <script lang="ts">
   import config from '$lib/config.json';
+  import ArrowButton from '$lib/components/ArrowButton.svelte';
   import { getImageByNameOrFirst } from '$lib/getImages';
   import { page } from '$app/state';
 
   const images = import.meta.glob('../images/logo/*.{jpg,png,svg}', { eager: true }) as Record<string, { default: string }>;
   const logo = getImageByNameOrFirst(images, 'logo');
+
 </script>
 
 <header class="header">
@@ -16,7 +18,10 @@
     <ul class="header-right">
       {#each config.header.links as link}
         <li class:active={page.url.pathname === link.href}>
-          <a href={link.href}>{link.text}</a>
+          <a href={link.href}>
+            {link.text}
+            {#if link.sublinks} <ArrowButton /> {/if}
+          </a>
         </li>
       {/each}
     </ul>
@@ -73,6 +78,5 @@
     color: var(--color-pallete-5);
     transform: scale(1.15);
   }
-
 </style>
   
