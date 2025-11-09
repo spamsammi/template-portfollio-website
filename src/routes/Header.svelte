@@ -17,12 +17,10 @@
     <ul class="header-right">
       {#each config.header.links as link}
         <li class:active={page.url.pathname === link.href}>
-          <a href={link.href}>
-            {link.text}
-            {#if link.sublinks}
-              <i class="arrow right"></i>
-            {/if}
-          </a>
+          <a class="nav-item" href={link.href}>{link.text}</a>
+          {#if link.sublinks}
+            <button class="nav-item arrow right"></button>
+          {/if}
         </li>
       {/each}
     </ul>
@@ -30,6 +28,16 @@
 </header>
 
 <style>
+  .nav-item {
+    color: var(--color-pallete-7);
+    text-decoration: none;
+    background: none;
+    display: inline-block;
+    transition:
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+  }
   .header {
     background-color: var(--color-pallete-1);
     display: flex;
@@ -61,29 +69,17 @@
     gap: 1.5rem;
   }
   .header-right li {
+    list-style: none;
     font-family: var(--font-header);
     font-size: 1.2rem;
-    list-style: none;
   }
-.header-right li a {
-    color: var(--color-pallete-7);
-    text-decoration: none;
-    display: inline-block;
-    transition:
-      color 0.3s ease,
-      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    transform: scale(1);
-  }
-
-  .header-right li.active a {
-    color: var(--color-pallete-5);
-    font-weight: bold;
-  }
-
-  .header-right li:hover a {
+  .header-right li:hover .nav-item {
     color: var(--color-pallete-5);
     transform: scale(1.15);
+  }
+  .header-right li.active .nav-item {
+    color: var(--color-pallete-5);
+    font-weight: bold;
   }
   .arrow {
     border: solid black;
