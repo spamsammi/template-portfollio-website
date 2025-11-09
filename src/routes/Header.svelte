@@ -1,6 +1,5 @@
 <script lang="ts">
   import config from '$lib/config.json';
-  import ArrowButton from '$lib/components/ArrowButton.svelte';
   import { getImageByNameOrFirst } from '$lib/getImages';
   import { page } from '$app/state';
 
@@ -20,7 +19,9 @@
         <li class:active={page.url.pathname === link.href}>
           <a href={link.href}>
             {link.text}
-            {#if link.sublinks} <ArrowButton /> {/if}
+            {#if link.sublinks}
+              <i class="arrow right"></i>
+            {/if}
           </a>
         </li>
       {/each}
@@ -34,7 +35,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0rem 2rem;
   }
   .header-left {
     display: flex;
@@ -45,8 +46,9 @@
     text-decoration: none;
   }
   .header-left img {
-    width: 3rem;
+    width: 5rem;
     height: auto;
+    margin: 0;
   }
   .header-left h1 {
     color: var(--color-pallete-7);
@@ -63,20 +65,39 @@
     font-size: 1.2rem;
     list-style: none;
   }
-  .header-right li a {
+.header-right li a {
     color: var(--color-pallete-7);
     text-decoration: none;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(1);
     display: inline-block;
+    transition:
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    transform: scale(1);
   }
+
   .header-right li.active a {
-     color: var(--color-pallete-5);
-     font-weight: bold;
-   }
+    color: var(--color-pallete-5);
+    font-weight: bold;
+  }
+
   .header-right li:hover a {
     color: var(--color-pallete-5);
     transform: scale(1.15);
+  }
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    }
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
   }
 </style>
   
