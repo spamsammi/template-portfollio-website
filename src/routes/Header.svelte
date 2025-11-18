@@ -6,6 +6,7 @@
   const images = import.meta.glob('../images/logo/*.{jpg,png,svg}', { eager: true }) as Record<string, { default: string }>;
   const logo = getImageByNameOrFirst(images, 'logo');
 
+  let openIndex: number | null = null;
 </script>
 
 <header class="header">
@@ -15,14 +16,42 @@
   </div>
   <nav>
     <ul class="header-right">
-      {#each config.header.links as link}
-        <li class:active={page.url.pathname === link.href}>
+      {#each config.header.links as link, i}
+      <li
+        class:active={page.url.pathname === link.href}
+        on:mouseenter={() => (openIndex = i)}
+        on:mouseleave={() => (openIndex = null)}
+      >
+        <div class="nav-link">
           <a class="nav-item" href={link.href}>{link.text}</a>
+
           {#if link.sublinks}
-            <button class="nav-item arrow right"></button>
+            <button
+              class="nav-item submenu-toggle"
+              on:click={() => (openIndex = openIndex === i ? null : i)}
+              aria-expanded={openIndex === i}
+            >
+              <span
+                class="arrow"
+                class:right={openIndex !== i}
+                class:down={openIndex === i}
+                aria-hidden="true"
+              ></span>
+            </button>
           {/if}
-        </li>
-      {/each}
+        </div>
+
+        {#if link.sublinks && openIndex === i}
+          <ul class="submenu">
+            {#each link.sublinks as sublink}
+              <li>
+                <a href={sublink.href} class="submenu-item">{sublink.text}</a>
+              </li>
+            {/each}
+          </ul>
+        {/if}
+      </li>
+    {/each}
     </ul>
   </nav>
 </header>
@@ -37,6 +66,47 @@
       color 0.3s ease,
       transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: scale(1);
+  }
+  .submenu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  .submenu {
+    position: absolute;
+    background: var(--color-pallete-1);
+    list-style: none;
+    margin: 0.5rem 0 0;
+    padding: 0.5rem 0;
+    border-radius: 0.25rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  }
+  .submenu li {
+    padding: 0.3rem 1rem;
+  }
+  .submenu-item {
+    color: var(--color-pallete-7);
+    text-decoration: none;
+    display: block;
+    transition: color 0.2s ease;
+  }
+  .submenu-item:hover {
+    color: var(--color-pallete-5);
+  }
+  .arrow {
+    border: solid var(--color-pallete-7);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transition: transform 0.2s ease;
+  }
+  .right {
+    transform: rotate(-45deg);
+  }
+  .down {
+    border-color: var(--color-pallete-5);
+    transform: rotate(45deg);
   }
   .header {
     background-color: var(--color-pallete-1);
@@ -75,25 +145,11 @@
   }
   .header-right li:hover .nav-item {
     color: var(--color-pallete-5);
-    transform: scale(1.15);
+    transform: scale(1.07);
   }
   .header-right li.active .nav-item {
     color: var(--color-pallete-5);
     font-weight: bold;
-  }
-  .arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-  }
-  .right {
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    }
-  .down {
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
   }
 </style>
   
