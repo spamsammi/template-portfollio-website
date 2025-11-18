@@ -106,7 +106,10 @@
   }
   .down {
     border-color: var(--color-pallete-5);
-    transform: rotate(45deg);
+    transition:
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: rotate(45deg) translateY(-4px);
   }
   .header {
     background-color: var(--color-pallete-1);
