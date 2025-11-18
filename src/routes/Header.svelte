@@ -14,22 +14,21 @@
     <a href="/"><img src={logo} alt="Logo"></a>
     <a href="/"><h1>{config.title.text}</h1></a>
   </div>
-  <nav>
+  <nav on:mouseleave={() => (openIndex = null)}>
     <ul class="header-right">
       {#each config.header.links as link, i}
       <li
         class:active={page.url.pathname === link.href}
         on:mouseenter={() => (openIndex = i)}
-        on:mouseleave={() => (openIndex = null)}
       >
         <div class="nav-link">
           <a class="nav-item" href={link.href}>{link.text}</a>
-
           {#if link.sublinks}
             <button
               class="nav-item submenu-toggle"
               on:click={() => (openIndex = openIndex === i ? null : i)}
               aria-expanded={openIndex === i}
+              aria-label="arrow"
             >
               <span
                 class="arrow"
