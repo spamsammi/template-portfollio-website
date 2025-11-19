@@ -79,7 +79,7 @@
     margin: 0.5rem 0 0;
     padding: 0.5rem 0;
     border-radius: 0.25rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
   }
   .submenu li {
     padding: 0.3rem 1rem;
@@ -88,10 +88,14 @@
     color: var(--color-pallete-7);
     text-decoration: none;
     display: block;
-    transition: color 0.2s ease;
+    transition:
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
   }
   .submenu-item:hover {
     color: var(--color-pallete-5);
+    transform: scale(1.07);
   }
   .arrow {
     border: solid var(--color-pallete-7);
@@ -104,7 +108,7 @@
     transform: rotate(-45deg);
   }
   .down {
-    border-color: var(--color-pallete-5);
+    border-color: inherit;
     transition:
       color 0.3s ease,
       transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
