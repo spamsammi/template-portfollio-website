@@ -22,10 +22,10 @@
       {#each config.header.links as link, i}
       <li>
         <div 
-          role="button" 
-          tabindex="0"
           class="nav-item"
           class:active={page.url.pathname === link.href}
+          role="button" 
+          tabindex="0"
           on:mouseenter={() => (openIndex = i)}
         >
           <a href={link.href}>{link.text}</a>
@@ -49,9 +49,11 @@
         {#if link.sublinks && openIndex === i}
           <ul class="submenu">
             {#each link.sublinks as sublink}
-              <li>
-                <a href={sublink.href} class="nav-item">{sublink.text}</a>
-              </li>
+              <div class="nav-item">
+                <li>
+                  <a href={sublink.href}>{sublink.text}</a>
+                </li>
+              </div>
             {/each}
           </ul>
         {/if}
@@ -115,6 +117,7 @@
     padding: 0.5rem 0;
     border-radius: 0.25rem;
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+    flex-direction: column;
   }
   .submenu li {
     padding: 0.3rem 1rem;
@@ -151,7 +154,7 @@
   .header-right ul {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    column-gap: 1.5rem;
   }
   .header-right li {
     list-style: none;
