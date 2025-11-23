@@ -11,21 +11,27 @@
 
 <header class="header">
   <div class="header-left">
-    <a href="/"><img src={logo} alt="Logo"></a>
-    <a href="/"><h1>{config.title.text}</h1></a>
+    <a href="/"><img class="nav-item" src={logo} alt="Logo"></a>
+    <a href="/"><h1 class="nav-item">{config.title.text}</h1></a>
   </div>
-  <nav on:mouseleave={() => (openIndex = null)}>
-    <ul class="header-right">
+  <nav 
+    class="header-right"
+    on:mouseleave={() => (openIndex = null)}
+  >
+    <ul>
       {#each config.header.links as link, i}
-      <li
-        class:active={page.url.pathname === link.href}
-        on:mouseenter={() => (openIndex = i)}
-      >
-        <div class="nav-link">
-          <a class="nav-item" href={link.href}>{link.text}</a>
+      <li>
+        <div 
+          role="button" 
+          tabindex="0"
+          class="nav-item"
+          class:active={page.url.pathname === link.href}
+          on:mouseenter={() => (openIndex = i)}
+        >
+          <a href={link.href}>{link.text}</a>
           {#if link.sublinks}
             <button
-              class="nav-item submenu-toggle"
+              class="submenu-toggle"
               on:click={() => (openIndex = openIndex === i ? null : i)}
               aria-expanded={openIndex === i}
               aria-label="arrow"
@@ -44,7 +50,7 @@
           <ul class="submenu">
             {#each link.sublinks as sublink}
               <li>
-                <a href={sublink.href} class="submenu-item">{sublink.text}</a>
+                <a href={sublink.href} class="nav-item">{sublink.text}</a>
               </li>
             {/each}
           </ul>
@@ -58,13 +64,42 @@
 <style>
   .nav-item {
     color: var(--color-pallete-7);
-    text-decoration: none;
-    background: none;
     display: inline-block;
     transition:
       color 0.3s ease,
       transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transform: scale(1);
+  }
+  .nav-item:hover {
+    border-color: var(--color-pallete-5);
+    color: var(--color-pallete-5);
+    transform: scale(1.07);
+  }
+  .nav-item.active {
+    border-color: var(--color-pallete-5);
+    color: var(--color-pallete-5);
+  }
+  .nav-item:hover .arrow {
+    border-color: var(--color-pallete-5);
+  }
+  .nav-item:hover .down {
+    border-color: var(--color-pallete-5);
+  }
+  .arrow {
+    border: solid var(--color-pallete-7);
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transition: transform 0.2s ease, color 0.3s ease;
+  }
+  .right {
+    transform: rotate(-45deg);
+  }
+  .down {
+    transition:
+      color 0.3s ease,
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: rotate(45deg) translateY(-4px);
   }
   .submenu-toggle {
     background: none;
@@ -83,36 +118,6 @@
   }
   .submenu li {
     padding: 0.3rem 1rem;
-  }
-  .submenu-item {
-    color: var(--color-pallete-7);
-    text-decoration: none;
-    display: block;
-    transition:
-      color 0.3s ease,
-      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: scale(1);
-  }
-  .submenu-item:hover {
-    color: var(--color-pallete-5);
-    transform: scale(1.07);
-  }
-  .arrow {
-    border: solid var(--color-pallete-7);
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 4px;
-    transition: transform 0.2s ease;
-  }
-  .right {
-    transform: rotate(-45deg);
-  }
-  .down {
-    border-color: inherit;
-    transition:
-      color 0.3s ease,
-      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: rotate(45deg) translateY(-4px);
   }
   .header {
     background-color: var(--color-pallete-1);
@@ -141,6 +146,10 @@
   }
   .header-right {
     display: flex;
+    justify-content: flex-end;
+  }
+  .header-right ul {
+    display: flex;
     align-items: center;
     gap: 1.5rem;
   }
@@ -149,13 +158,10 @@
     font-family: var(--font-header);
     font-size: 1.2rem;
   }
-  .header-right li:hover .nav-item {
-    color: var(--color-pallete-5);
-    transform: scale(1.07);
-  }
-  .header-right li.active .nav-item {
-    color: var(--color-pallete-5);
-    font-weight: bold;
+  .header-right a {
+    text-decoration: none;
+    background: none;
+    color: inherit;
   }
 </style>
   
